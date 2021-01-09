@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="post-content">
     <h1> {{post.title}}</h1>
     <br />
     <br />
@@ -24,3 +24,10 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.post-content {
+  width: 50%;
+  margin: 0 auto;
+}
+</style>

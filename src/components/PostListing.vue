@@ -45,8 +45,9 @@ export default {
     }
   },
   beforeMount () {
-    this.loadData()
-    this.getComments()
+    if (this.$store.state.post.fetchStatus === false) this.loadData()
+    else this.localPosts = this.$store.state.post.posts
+    if (this.$store.state.comment.fetchStatus === false) this.getComments()
   }
 }
 </script>

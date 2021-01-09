@@ -8,6 +8,11 @@
     >Login</v-toolbar-title>
     <div class="flex-grow-1"></div>
     <v-text v-if="wrongValue">Invalid Email</v-text>
+    <v-card
+      elevation="2"
+      class="mx-auto my-12"
+      max-width="500"
+    >
     <v-card-text>
       <v-form>
         <v-text-field
@@ -23,11 +28,12 @@
         class="px-8"
         color="primary"
         :loading="loading"
-        :disabled="loading"
+        :disabled="validate || loading"
         @keydown.prevent="listenForEnter"
         @click.prevent="sendDataForLogin"
       >Login</v-btn>
     </v-card-actions>
+</v-card>
   </div>
 </template>
 
@@ -65,6 +71,12 @@ export default {
         }
         this.loading = false
       })
+    }    
+  },
+  computed: {
+    validate () {
+      if (!this.email) return true
+      return false
     }
   }
 }

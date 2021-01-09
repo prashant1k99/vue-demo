@@ -112,7 +112,7 @@ export default {
   }
 }
 .body-content {
-  width: 90%;
-  margin: auto;
+  width: 80%;
+  margin: 0 auto;
 }
 </style>
