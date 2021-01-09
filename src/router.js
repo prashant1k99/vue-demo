@@ -21,14 +21,14 @@ const router = new Router({
         authRequired: true
       }
     },
-    // {
-    //   path: '/create',
-    //   name: 'create-post',
-    //   component: () => import('./views/Post/Create.vue'),
-    //   meta: {
-    //     authRequired: true
-    //   }
-    // },
+    {
+      path: '/create',
+      name: 'create-post',
+      component: () => import('./views/Post/Create.vue'),
+      meta: {
+        authRequired: true
+      }
+    },
     {
       path: '/view/:id',
       name: 'view-post',

@@ -82,9 +82,6 @@ export default {
   components: {
     Avatar
   },
-  data: () => ({
-    // 
-  }),
   computed: {
     auth () {
       return this.$store.state.auth.status

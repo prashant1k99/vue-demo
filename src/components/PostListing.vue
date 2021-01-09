@@ -1,10 +1,20 @@
 <template>
   <div>
     <h1>Posts</h1>
+    <v-btn color="primary" @click="$router.push('/create')">Add New Post</v-btn>
     <ul v-if="localPosts">
-      <li v-for="post in localPosts" :key="post.id" @click="sendToPost(post.id)">
-        <a @click="sendToPost(post.id)">{{post.title}}</a>
-      </li>
+      <v-card
+        v-for="post in localPosts" :key="post.id"
+        class="mx-auto my-12"
+        max-width="500"
+        @click="sendToPost(post.id)"
+      >
+        <v-img
+          height="150"
+          src="https://picsum.photos/id/237/200/300"
+        ></v-img>
+        <v-card-title>{{post.title}}</v-card-title>
+      </v-card>
     </ul>
     <v-progress-circular
       v-else
@@ -22,7 +32,8 @@ export default {
   }),
   methods: {
     ...mapActions({
-      getPosts: 'post/getPosts' // map `this.add()` to `this.$store.dispatch('increment')`
+      getPosts: 'post/getPosts',
+      getComments: 'comment/getComments'
     }),
     sendToPost (id) {
       this.$router.push(`/view/${id}`)
@@ -35,6 +46,7 @@ export default {
   },
   beforeMount () {
     this.loadData()
+    this.getComments()
   }
 }
 </script>

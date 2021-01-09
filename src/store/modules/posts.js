@@ -17,7 +17,7 @@ const actions = {
   async getPosts ({commit, rootState }) {
     if (rootState.post.fetchStatus === false) {
       const posts = await axios.get('/posts')
-      const usersPost = posts.data.filter(post => post.creator === rootState.auth.userData.userId)
+      const usersPost = posts.data
       commit('ADD_POST', usersPost)
       commit('SET_FETCH_STATUS', true)
       return usersPost
@@ -25,28 +25,15 @@ const actions = {
       return rootState.post.posts
     }
   },
-  async deletePost (
-    { commit },
-    data
-  ) {
-    const users = await axios.get('/users')
-    for (const user of users.data) {
-      // eslint-disable-next-line eqeqeq
-      if (user.uId == data.email) {
-        const data = {
-          displayName: user.name,
-          photoUrl: 'https://i.pravatar.cc/150?u=1',
-          userId: user.uId
-        }
-        commit('SET_USER', data)
-        return ('Success')
-      }
-    }
-    return ('Failure')
+  async addPost ({commit}, data) {
+    await axios.post('/posts', {
+      title: data.title
+    }).catch(err => {
+      console.log(err)
+    })
+    commit('PUSH_POST', data)
+    return ('Success')
   }
-  // async addPost ({commit}, data) {
-
-  // }
 }
 
 // mutations
@@ -56,6 +43,12 @@ const mutations = {
   },
   ADD_POST (state, data) {
     state.posts = data
+  },
+  PUSH_POST (state, data) {
+    state.posts.push({
+      id: state.posts.length + 1,
+      title: data.title
+    })
   },
   SET_FETCH_STATUS (state, data) {
     state.fetchStatus = data

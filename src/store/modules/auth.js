@@ -4,8 +4,7 @@ const state = {
   status: false,
   userData: {
     displayName: '',
-    photoUrl: 'https://i.pravatar.cc/150?u=1',
-    userId: ''
+    photoUrl: 'https://i.pravatar.cc/150?u=1'
   }
 }
 
@@ -22,20 +21,14 @@ const actions = {
     { commit },
     data
   ) {
-    const users = await axios.get('/users')
-    for (const user of users.data) {
-      // eslint-disable-next-line eqeqeq
-      if (user.uId == data.email) {
-        const data = {
-          displayName: user.name,
-          photoUrl: 'https://i.pravatar.cc/150?u=1',
-          userId: user.uId
-        }
-        commit('SET_USER', data)
-        return ('Success')
-      }
+    console.log(data)
+    const users = await axios.get('/profile')
+    const userData = {
+      displayName: users.data.name,
+      photoUrl: 'https://i.pravatar.cc/150?u=1'
     }
-    return ('Failure')
+    commit('SET_USER', userData)
+    return ('Success')
   },
   signOutUser ({ commit }) {
     commit('REMOVE_USER')

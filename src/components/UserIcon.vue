@@ -8,7 +8,7 @@
       </template>
       <v-list class="py-2">
         <v-list-item>
-          <v-list-item-title>Prashant Singh</v-list-item-title>
+          <v-list-item-title> {{userName}}</v-list-item-title>
         </v-list-item>
         <v-divider />
         <v-list-item color="error" @click="removeUser">Sign Out</v-list-item>
@@ -21,7 +21,6 @@
 import { mapActions, mapState } from 'vuex'
 export default {
   methods: {
-    // Import action for user signout and link to the signout btn
     ...mapActions({
       logOut: 'auth/signOutUser'
     }),
@@ -32,7 +31,8 @@ export default {
   },
   computed: {
     ...mapState({
-      userImage: (state) => state.auth.userData.photoUrl
+      userImage: (state) => state.auth.userData.photoUrl,
+      userName: (state) => state.auth.userData.displayName
     })
   }
 }
