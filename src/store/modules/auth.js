@@ -8,14 +8,12 @@ const state = {
   }
 }
 
-// getters
 const getters = {
   userLoggedStatus (state) {
     return state.status
   }
 }
 
-// actions
 const actions = {
   async signInUser (
     { commit },
@@ -35,7 +33,6 @@ const actions = {
   }
 }
 
-// mutations
 const mutations = {
   SET_USER (state, data) {
     state.status = true

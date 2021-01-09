@@ -1,12 +1,12 @@
 <template>
-  <div>
+  <div class="d-flex align-center flex-column">
     <h1>Posts</h1>
     <v-btn color="primary" @click="$router.push('/create')">Add New Post</v-btn>
     <ul v-if="localPosts">
       <v-card
         v-for="post in localPosts" :key="post.id"
         class="mx-auto my-12"
-        max-width="500"
+        min-width="500"
         @click="sendToPost(post.id)"
       >
         <v-img

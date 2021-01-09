@@ -8,7 +8,7 @@
         required
       ></v-text-field>
       <v-btn
-        :disabled="loading"
+        :disabled="validate || loading"
         color="primary"
         class="mr-4"
         @click="createPost"
@@ -41,6 +41,12 @@ export default {
         this.body = ''
         this.loading = false
       })
+    }
+  },
+  computed: {
+    validate () {
+      if (!this.body) return true
+      return false
     }
   }
 }

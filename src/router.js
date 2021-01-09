@@ -1,8 +1,3 @@
-/*=========================================================================================
-  File Name: router.js
-  Description: Routes for vue-router. Lazy loading is enabled.  
-==========================================================================================*/
-
 import Vue from 'vue'
 import Router from 'vue-router'
 import store from './store'
@@ -44,19 +39,16 @@ const router = new Router({
       meta: {
         authRequired: false
       }
+    },
+    {
+      path: '/error-404',
+      name: 'error',
+      component: () => import('./views/Error.vue')
+    },
+    {
+      path: '*',
+      redirect: '/error-404'
     }
-    // {
-    //   path: '/error-404',
-    //   name: 'error',
-    //   component: () => import('./views/Error.vue'),
-    //   meta: {
-    //     authRequired: true
-    //   }
-    // },
-    // {
-    //   path: '*',
-    //   redirect: '/error-404'
-    // }
   ]
 })
 

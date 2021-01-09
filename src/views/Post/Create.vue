@@ -8,7 +8,7 @@
         required
       ></v-text-field>
       <v-btn
-        :disabled="loading"
+        :disabled="validate || loading"
         color="primary"
         class="mr-4"
         @click="createPost"
@@ -30,6 +30,10 @@ export default {
     post () {
       // eslint-disable-next-line eqeqeq
       return this.$store.state.post.posts.find(post => post.id == this.$route.params.id)
+    },
+    validate () {
+      if (!this.title) return true
+      else return false
     }
   },
   methods: {

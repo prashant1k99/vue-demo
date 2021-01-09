@@ -5,7 +5,6 @@ const state = {
   comments: []
 }
 
-// getters
 const getters = {
   getComments: (state) => (id) => {
     // eslint-disable-next-line eqeqeq
@@ -13,7 +12,6 @@ const getters = {
   }
 }
 
-// actions
 const actions = {
   async getComments ({commit, rootState }) {
     if (rootState.post.fetchStatus === false) {
@@ -37,7 +35,6 @@ const actions = {
   }
 }
 
-// mutations
 const mutations = {
   ADD_COMMENT (state, data) {
     state.comments = data

@@ -5,14 +5,12 @@ const state = {
   posts: []
 }
 
-// getters
 const getters = {
   getPost: (state) => (id) => {
     return state.posts.find(post => post.id === id)
   }
 }
 
-// actions
 const actions = {
   async getPosts ({commit, rootState }) {
     if (rootState.post.fetchStatus === false) {
@@ -36,7 +34,6 @@ const actions = {
   }
 }
 
-// mutations
 const mutations = {
   REMOVE_POST (state, data) {
     state.posts = data
