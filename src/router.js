@@ -5,6 +5,8 @@
 
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from './store'
+
 Vue.use(Router)
 
 const router = new Router({
@@ -18,7 +20,7 @@ const router = new Router({
       meta: {
         authRequired: true
       }
-    }
+    },
     // {
     //   path: '/create',
     //   name: 'create-post',
@@ -27,22 +29,22 @@ const router = new Router({
     //     authRequired: true
     //   }
     // },
-    // {
-    //   path: '/view/:id',
-    //   name: 'view-post',
-    //   component: () => import('./views/Post/View.vue'),
-    //   meta: {
-    //     authRequired: true
-    //   }
-    // },
-    // {
-    //   path: '/login',
-    //   name: 'login',
-    //   component: () => import('./views/Login.vue'),
-    //   meta: {
-    //     authRequired: false
-    //   }
-    // },
+    {
+      path: '/view/:id',
+      name: 'view-post',
+      component: () => import('./views/Post/View.vue'),
+      meta: {
+        authRequired: true
+      }
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: () => import('./views/Login.vue'),
+      meta: {
+        authRequired: false
+      }
+    }
     // {
     //   path: '/error-404',
     //   name: 'error',
@@ -61,8 +63,12 @@ const router = new Router({
 router.beforeEach((to, _, next) => {
   if (to.meta.authRequired === true) {
     // NOTE run the logic for checking auth
+    if (store.state.auth.status) next()
+    else router.push({ name: 'login', query: { to: to.path } })
   } else if (to.meta.authRequired === false) {
     // NOTE for check on pages like login
+    if (store.state.auth.status) router.push(router.currentRoute.query.to || '/')
+    return next()
   } else {
     return next()
   }
