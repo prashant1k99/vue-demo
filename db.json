@@ -1,11 +1,9 @@
 {
-  "users": [
-    {
+  "user": {
       "uId": 1,
       "username": "prashant1k99",
       "name": "Prashant Singh"
-    }
-  ],
+    },
   "posts": [
     {
       "id": 1,
